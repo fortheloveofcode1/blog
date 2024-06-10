@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+</div>
+
+{% endfor %}
+
+<h1>Dashboard</h1>
+
+<div class="card text-center">
+    <div class="card-header">
+        Welcome to WritusMagica – Where Words Weave Magic!
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{current_user.username}}</h5>
+        <p class="card-text">
+            <strong>Name : </strong>{{current_user.name}}<br />
+            <strong>Email : </strong>{{current_user.email}}<br />
+        </p>
+
+        <a href="{{ url_for('logout')}}" class="btn btn-outline-info">Logout</a>
+    </div>
+    <div class="card-footer text-body-secondary">
+        Member since: {{current_user.date_added.strftime('%B %d, %Y')}}
+    </div>
+</div>
+{% endblock %}

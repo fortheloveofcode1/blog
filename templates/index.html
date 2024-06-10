@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <h1 class="display-4">Welcome to Our Blog!</h1>
+        <p class="lead">Explore the latest posts and join our community.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('posts') }}"
+            role="button">Explore Posts</a>
+    </div>
+</div>
+<!-- Featured Articles Section -->
+<div class="container mt-5">
+    <h2 class="text-center">Featured Articles</h2>
+    <div class="row">
+        {% for post in featured_posts %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content[:100]|safe }}...</p>
+                    <a href="{{ url_for('post', id=post.id) }}"
+                        class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Latest Posts Section -->
+<div class="container mt-5">
+    <h2 class="text-center">Latest Posts</h2>
+    <div class="row">
+        {% for post in latest_posts %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.content[:100]|safe }}...</p>
+                    <a href="{{ url_for('post', id=post.id) }}"
+                        class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center">
+        <a href="{{ url_for('posts') }}" class="btn btn-secondary">View All
+            Posts</a>
+    </div>
+</div>
+{% endblock %}

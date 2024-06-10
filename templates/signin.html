@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+</div>
+
+{% endfor %}
+
+{% if current_user_info %}
+<p>{{ current_user_info.id }}. {{ current_user_info.name }}</p>
+<p>{{ current_user_info.email }}</p>
+{% else %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.username.label }}
+        {{ form.username(class="form-control") }}
+    </div>
+
+    <div>
+        {{ form.name.label }}
+        {{ form.name(class="form-control") }}
+    </div>
+
+    <div>
+        {{ form.email.label }}
+        {{ form.email(id="email", class="form-control") }}
+        <div id="email-feedback"></div>
+    </div>
+
+    <div>
+        {{ form.password.label }}
+        {{ form.password(id="password", class="form-control") }}
+        <div id="password-feedback"></div>
+    </div>
+    <br />
+    {{ form.submit(class="btn btn-info")}}
+</form>
+
+{% endif %}
+
+{% endblock %}
